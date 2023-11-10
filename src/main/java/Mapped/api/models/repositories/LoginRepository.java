@@ -15,7 +15,7 @@ public class LoginRepository {
 
     public List<Login> findAll() throws SQLException{
         var logins = new ArrayList<Login>();
-        var sql = "SELECT * FROM #Placeholder#";
+        var sql = "SELECT * FROM TB_PS_LOGIN";
 
         try(var conn = DatabaseFactory.getConnection();
             var statement = conn.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class LoginRepository {
 
     public void add(Login login) throws SQLException
     {
-        var sql = "INSERT INTO #PlaceHolder# (id,CPF, Senha" +
+        var sql = "INSERT INTO TB_PS_LOGIN (id,CPF, Senha" +
                 " VALUES (?,?,?)";
 
         try
@@ -53,7 +53,7 @@ public class LoginRepository {
     }
 
     public Optional<Login> find(int id) throws SQLException{
-        var sql = "SELECT * FROM #Placeholder# WHERE id = ?";
+        var sql = "SELECT * FROM TB_PS_LOGIN WHERE id = ?";
 
 
         try{
@@ -81,7 +81,7 @@ public class LoginRepository {
     }
 
     public void update(Login login ) {
-        var sql = "UPDATE #Placeholder# SET CPF = ?, Senha = ? WHERE ID = ?";
+        var sql = "UPDATE TB_PS_LOGIN SET CPF = ?, Senha = ? WHERE ID = ?";
         try{
             var conn = DatabaseFactory.getConnection();
             var statement = conn.prepareStatement(sql);
@@ -96,7 +96,7 @@ public class LoginRepository {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM #Placeholder# WHERE id = ?";
+        String sql = "DELETE FROM TB_PS_LOGIN WHERE id = ?";
 
         try {
             var conn = DatabaseFactory.getConnection();
