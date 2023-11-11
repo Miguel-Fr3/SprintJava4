@@ -10,19 +10,15 @@ import java.util.Optional;
 public class LoginService {
     private final LoginRepository loginRepository;
 
-    public LoginService () {
+    public LoginService() {
         this.loginRepository = new LoginRepository();
     }
 
-    public boolean login (String CPF, String Senha) throws Exception {
+    public boolean login(String CPF, String Senha) throws Exception {
         if (CPF == null || Senha == null) throw new IllegalArgumentException("CPF e senha não podem ser nulos.");
 
         Login login = this.loginRepository.login(CPF);
 
-        if (Objects.equals(login.getSenha(), Senha) && Objects.equals(login.getCPF(), CPF)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.equals(login.getSenha(), Senha) && Objects.equals(login.getCPF(), CPF);
     }
 }

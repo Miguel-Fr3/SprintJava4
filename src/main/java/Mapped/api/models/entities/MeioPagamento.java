@@ -9,9 +9,17 @@ public class MeioPagamento {
     public MeioPagamento() {
     }
 
-    public MeioPagamento(String dsMeioPagamento, boolean fgAtivo,Integer cdMeioPgto) {
+    public MeioPagamento(Integer cdMeioPgto, String dsMeioPagamento, boolean fgAtivo) {
+        this.cdMeioPgto = cdMeioPgto;
         this.dsMeioPagamento = dsMeioPagamento;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdMeioPgto() {
+        return cdMeioPgto;
+    }
+
+    public void setCdMeioPgto(Integer cdMeioPgto) {
         this.cdMeioPgto = cdMeioPgto;
     }
 

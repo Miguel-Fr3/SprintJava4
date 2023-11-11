@@ -9,9 +9,17 @@ public class FormaPagamento {
     public FormaPagamento() {
     }
 
-    public FormaPagamento(String dsFormaPagamento, boolean fgAtivo, Integer cdFormaPgto) {
+    public FormaPagamento(Integer cdFormaPgto, String dsFormaPagamento, boolean fgAtivo) {
+        this.cdFormaPgto = cdFormaPgto;
         this.dsFormaPagamento = dsFormaPagamento;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdFormaPgto() {
+        return cdFormaPgto;
+    }
+
+    public void setCdFormaPgto(Integer cdFormaPgto) {
         this.cdFormaPgto = cdFormaPgto;
     }
 
