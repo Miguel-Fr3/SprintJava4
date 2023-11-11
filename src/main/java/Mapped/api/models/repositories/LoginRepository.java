@@ -23,9 +23,9 @@ public class LoginRepository {
         ){
             while(results.next()){
                 logins.add(new Login(
-                        results.getInt("id"),
-                        results.getString("CPF"),
-                        results.getString("Senha")));
+                        results.getInt("CDLOGIN"),
+                        results.getString("NRCPF"),
+                        results.getString("DSSENHA")));
 
             }
         }
@@ -34,7 +34,7 @@ public class LoginRepository {
 
     public void add(Login login) throws SQLException
     {
-        var sql = "INSERT INTO TB_PS_LOGIN (id,CPF, Senha" +
+        var sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN,NRCPF, DSSENHA" +
                 " VALUES (?,?,?)";
 
         try
@@ -64,9 +64,9 @@ public class LoginRepository {
                 ResultSet rs = statement.executeQuery();
                 if(rs.next()) {
                     var login = new Login(
-                            rs.getInt("id"),
-                            rs.getString("CPF"),
-                            rs.getString("Senha"));;
+                            rs.getInt("CDLOGIN"),
+                            rs.getString("NRCPF"),
+                            rs.getString("DSSENHA"));;
                     return Optional.ofNullable(login);
                 }
             } catch (Exception e) {
@@ -79,9 +79,36 @@ public class LoginRepository {
         }
         return Optional.empty();
     }
+    public Login login(String CPF) throws SQLException{
+        var sql = "SELECT * FROM TB_PS_LOGIN WHERE NRCPF = ?";
+
+
+        try{
+            var conn = DatabaseFactory.getConnection();
+            var statement = conn.prepareStatement(sql);
+            statement.setString(1, CPF);
+            try{
+                ResultSet rs = statement.executeQuery();
+                if(rs.next()) {
+                    var login = new Login(
+                            rs.getInt("CDLOGIN"),
+                            rs.getString("NRCPF"),
+                            rs.getString("DSSENHA"));;
+                    return login;
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new SQLException(e);
+        }
+        return null;
+    }
 
     public void update(Login login ) {
-        var sql = "UPDATE TB_PS_LOGIN SET CPF = ?, Senha = ? WHERE ID = ?";
+        var sql = "UPDATE TB_PS_LOGIN SET NRCPF = ?, DSSENHA = ? WHERE CDLOGIN = ?";
         try{
             var conn = DatabaseFactory.getConnection();
             var statement = conn.prepareStatement(sql);
@@ -96,7 +123,7 @@ public class LoginRepository {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM TB_PS_LOGIN WHERE id = ?";
+        String sql = "DELETE FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
 
         try {
             var conn = DatabaseFactory.getConnection();
