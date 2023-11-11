@@ -1,21 +1,21 @@
 package Mapped.api.models.entities;
 
 public class Login {
-    @Id
+
 
     private  int id;
-    private String CPF;
-
+    private int CPF;
     private String Senha;
 
 
     public Login() {
     }
 
-    public Login(int id, String CPF, String senha) {
+    public Login(int id, int CPF, String senha) {
         this.id = id;
         this.CPF = CPF;
-        Senha = senha;
+        this.Senha = senha;
+
     }
 
     public int getId() {
@@ -26,11 +26,11 @@ public class Login {
         this.id = id;
     }
 
-    public String getCPF() {
+    public int getCPF() {
         return CPF;
     }
 
-    public void setCPF(String CPF) {
+    public void setCPF(int CPF) {
         this.CPF = CPF;
     }
 

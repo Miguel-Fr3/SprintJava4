@@ -24,7 +24,7 @@ public class LoginRepository {
             while(results.next()){
                 logins.add(new Login(
                         results.getInt("CDLOGIN"),
-                        results.getString("NRCPF"),
+                        results.getInt("NRCPF"),
                         results.getString("DSSENHA")));
 
             }
@@ -32,28 +32,27 @@ public class LoginRepository {
         return logins;
     }
 
-    public void add(Login login) throws SQLException
-    {
-        var sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN,NRCPF, DSSENHA" +
-                " VALUES (?,?,?)";
+    public void add(Login login) throws SQLException {
+        var sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN, NRCPF, DSSENHA) VALUES (?, ?, ?)";
 
-        try
-        {
+        System.out.println(login.getId());
+        System.out.println(login.getCPF());
+
+
+        try {
             var conn = DatabaseFactory.getConnection();
             var statement = conn.prepareStatement(sql);
             statement.setInt(1, login.getId());
-            statement.setString(2, login.getCPF());
+            statement.setInt(2, login.getCPF());
             statement.setString(3, login.getSenha());
             statement.executeUpdate();
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new SQLException(e);
         }
     }
 
     public Optional<Login> find(int id) throws SQLException{
-        var sql = "SELECT * FROM TB_PS_LOGIN WHERE id = ?";
+        var sql = "SELECT * FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
 
 
         try{
@@ -65,7 +64,7 @@ public class LoginRepository {
                 if(rs.next()) {
                     var login = new Login(
                             rs.getInt("CDLOGIN"),
-                            rs.getString("NRCPF"),
+                            rs.getInt("NRCPF"),
                             rs.getString("DSSENHA"));;
                     return Optional.ofNullable(login);
                 }
@@ -92,7 +91,7 @@ public class LoginRepository {
                 if(rs.next()) {
                     var login = new Login(
                             rs.getInt("CDLOGIN"),
-                            rs.getString("NRCPF"),
+                            rs.getInt("NRCPF"),
                             rs.getString("DSSENHA"));;
                     return login;
                 }
@@ -112,7 +111,7 @@ public class LoginRepository {
         try{
             var conn = DatabaseFactory.getConnection();
             var statement = conn.prepareStatement(sql);
-            statement.setString(1, login.getCPF());
+            statement.setInt(1, login.getCPF());
             statement.setString(2, login.getSenha());
             statement.setInt(3, login.getId());
             statement.executeUpdate();
@@ -134,4 +133,6 @@ public class LoginRepository {
             throw new RuntimeException(e);
         }
     }
+
+
 }

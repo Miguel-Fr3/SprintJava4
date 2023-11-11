@@ -3,6 +3,7 @@ package Mapped.api.services;
 import Mapped.api.models.entities.Login;
 import Mapped.api.models.repositories.LoginRepository;
 
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 

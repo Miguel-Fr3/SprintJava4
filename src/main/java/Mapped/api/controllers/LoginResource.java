@@ -2,6 +2,7 @@ package Mapped.api.controllers;
 
 import Mapped.api.models.entities.Login;
 import Mapped.api.models.repositories.LoginRepository;
+import Mapped.api.services.LoginService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.sql.SQLException;
@@ -19,7 +20,15 @@ public class LoginResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addLogin(Login login) throws SQLException {
+        System.out.println(login.getSenha());
         repository.add(login);
+    }
+    @POST
+    @Path("/autenticar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void Login(@FormParam("CPF") String CPF, @FormParam("Senha") String Senha) throws Exception {
+        LoginService loginService = new LoginService();
+        loginService.login(CPF, Senha);
     }
 
     @GET
