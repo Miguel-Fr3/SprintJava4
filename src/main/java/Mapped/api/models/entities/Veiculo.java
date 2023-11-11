@@ -13,13 +13,21 @@ public class Veiculo {
     public Veiculo() {
     }
 
-    public Veiculo(String nmModelo, String dsPlaca, String dsChassi, int nrAnoFabricacao, String nmCorVeiculo, boolean fgAtivo, Integer cdVeiculo) {
+    public Veiculo(Integer cdVeiculo, String nmModelo, String dsPlaca, String dsChassi, int nrAnoFabricacao, String nmCorVeiculo, boolean fgAtivo) {
+        this.cdVeiculo = cdVeiculo;
         this.nmModelo = nmModelo;
         this.dsPlaca = dsPlaca;
         this.dsChassi = dsChassi;
         this.nrAnoFabricacao = nrAnoFabricacao;
         this.nmCorVeiculo = nmCorVeiculo;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdVeiculo() {
+        return cdVeiculo;
+    }
+
+    public void setCdVeiculo(Integer cdVeiculo) {
         this.cdVeiculo = cdVeiculo;
     }
 

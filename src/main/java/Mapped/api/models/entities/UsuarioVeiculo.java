@@ -11,10 +11,18 @@ public class UsuarioVeiculo {
     public UsuarioVeiculo() {
     }
 
-    public UsuarioVeiculo(Date dtInicio, Date dtFim, boolean fgAtivo, Integer cdUser) {
+    public UsuarioVeiculo(Integer cdUser, Date dtInicio, Date dtFim, boolean fgAtivo) {
+        this.cdUser = cdUser;
         this.dtInicio = dtInicio;
         this.dtFim = dtFim;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdUser() {
+        return cdUser;
+    }
+
+    public void setCdUser(Integer cdUser) {
         this.cdUser = cdUser;
     }
 

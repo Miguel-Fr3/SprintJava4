@@ -8,8 +8,16 @@ public class Cidade {
     public Cidade() {
     }
 
-    public Cidade(String nmCidade, Integer cdCidade) {
+    public Cidade(Integer cdCidade, String nmCidade) {
+        this.cdCidade = cdCidade;
         this.nmCidade = nmCidade;
+    }
+
+    public Integer getCdCidade() {
+        return cdCidade;
+    }
+
+    public void setCdCidade(Integer cdCidade) {
         this.cdCidade = cdCidade;
     }
 

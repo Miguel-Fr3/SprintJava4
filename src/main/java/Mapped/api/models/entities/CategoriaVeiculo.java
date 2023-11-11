@@ -8,8 +8,16 @@ public class CategoriaVeiculo {
     public CategoriaVeiculo() {
     }
 
-    public CategoriaVeiculo(String dsCategoriaVeiculo, Integer cdCtVeiculo) {
+    public CategoriaVeiculo(Integer cdCtVeiculo, String dsCategoriaVeiculo) {
+        this.cdCtVeiculo = cdCtVeiculo;
         this.dsCategoriaVeiculo = dsCategoriaVeiculo;
+    }
+
+    public Integer getCdCtVeiculo() {
+        return cdCtVeiculo;
+    }
+
+    public void setCdCtVeiculo(Integer cdCtVeiculo) {
         this.cdCtVeiculo = cdCtVeiculo;
     }
 

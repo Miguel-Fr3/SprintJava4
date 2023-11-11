@@ -20,6 +20,31 @@ public class User {
     public User() {
     }
 
+    public User(Integer cdUser, String user, String nickNome, String cep, String rua, String cidade, String estado, String celular, String cpf, String complemento, String numeroEndereco, String telComercial, String bairro, boolean ativo) {
+        this.cdUser = cdUser;
+        this.user = user;
+        this.nickNome = nickNome;
+        this.cep = cep;
+        this.rua = rua;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.celular = celular;
+        this.cpf = cpf;
+        this.complemento = complemento;
+        this.numeroEndereco = numeroEndereco;
+        this.telComercial = telComercial;
+        this.bairro = bairro;
+        this.ativo = ativo;
+    }
+
+    public Integer getCdUser() {
+        return cdUser;
+    }
+
+    public void setCdUser(Integer cdUser) {
+        this.cdUser = cdUser;
+    }
+
     public String getUser() {
         return user;
     }
@@ -122,22 +147,5 @@ public class User {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
-    }
-
-    public User(String user, String nickNome, String cep, String rua, String cidade, String estado, String celular, String cpf, String complemento, String numeroEndereco, String telComercial, String bairro, boolean ativo,Integer cdUser) {
-        this.user = user;
-        this.nickNome = nickNome;
-        this.cep = cep;
-        this.rua = rua;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.celular = celular;
-        this.cpf = cpf;
-        this.complemento = complemento;
-        this.numeroEndereco = numeroEndereco;
-        this.telComercial = telComercial;
-        this.bairro = bairro;
-        this.ativo = ativo;
-        this.cdUser = cdUser;
     }
 }

@@ -10,10 +10,18 @@ public class Fabricante {
     public Fabricante() {
     }
 
-    public Fabricante(String nmFabricante, String dsDescricao, Double fgAtivo, Integer cdFabricante) {
+    public Fabricante(Integer cdFabricante, String nmFabricante, String dsDescricao, Double fgAtivo) {
+        this.cdFabricante = cdFabricante;
         this.nmFabricante = nmFabricante;
         this.dsDescricao = dsDescricao;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdFabricante() {
+        return cdFabricante;
+    }
+
+    public void setCdFabricante(Integer cdFabricante) {
         this.cdFabricante = cdFabricante;
     }
 

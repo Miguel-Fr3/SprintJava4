@@ -9,9 +9,17 @@ public class ItemChecklist {
     public ItemChecklist() {
     }
 
-    public ItemChecklist(String dsItemChecklist, boolean nrNotaMaxima, Integer cdIchecklist) {
+    public ItemChecklist(Integer cdIchecklist, String dsItemChecklist, boolean nrNotaMaxima) {
+        this.cdIchecklist = cdIchecklist;
         this.dsItemChecklist = dsItemChecklist;
         this.nrNotaMaxima = nrNotaMaxima;
+    }
+
+    public Integer getCdIchecklist() {
+        return cdIchecklist;
+    }
+
+    public void setCdIchecklist(Integer cdIchecklist) {
         this.cdIchecklist = cdIchecklist;
     }
 

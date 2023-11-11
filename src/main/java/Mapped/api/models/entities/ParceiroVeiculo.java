@@ -11,9 +11,17 @@ public class ParceiroVeiculo {
     public ParceiroVeiculo() {
     }
 
-    public ParceiroVeiculo(Date dtInicio, Date dtFim, Integer cdParceiro) {
+    public ParceiroVeiculo(Integer cdParceiro, Date dtInicio, Date dtFim) {
+        this.cdParceiro = cdParceiro;
         this.dtInicio = dtInicio;
         this.dtFim = dtFim;
+    }
+
+    public Integer getCdParceiro() {
+        return cdParceiro;
+    }
+
+    public void setCdParceiro(Integer cdParceiro) {
         this.cdParceiro = cdParceiro;
     }
 
@@ -31,13 +39,5 @@ public class ParceiroVeiculo {
 
     public void setDtFim(Date dtFim) {
         this.dtFim = dtFim;
-    }
-
-    @Override
-    public String toString() {
-        return "ParceiroVeiculo{" +
-                "dtInicio=" + dtInicio +
-                ", dtFim=" + dtFim +
-                '}';
     }
 }

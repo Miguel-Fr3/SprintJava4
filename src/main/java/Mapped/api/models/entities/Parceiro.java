@@ -16,8 +16,8 @@ public class Parceiro {
     public Parceiro() {
     }
 
-    public Parceiro(String nmParceiro, double nrCep, String nmRua, String nmCidade, String nmEstado, String dsComplemento,
-                    double nrCpf, double dsNumeroEndereco, double fgAtivo, Integer cdParceiro) {
+    public Parceiro(Integer cdParceiro, String nmParceiro, double nrCep, String nmRua, String nmCidade, String nmEstado, String dsComplemento, double nrCpf, double dsNumeroEndereco, double fgAtivo) {
+        this.cdParceiro = cdParceiro;
         this.nmParceiro = nmParceiro;
         this.nrCep = nrCep;
         this.nmRua = nmRua;
@@ -27,6 +27,13 @@ public class Parceiro {
         this.nrCpf = nrCpf;
         this.dsNumeroEndereco = dsNumeroEndereco;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdParceiro() {
+        return cdParceiro;
+    }
+
+    public void setCdParceiro(Integer cdParceiro) {
         this.cdParceiro = cdParceiro;
     }
 

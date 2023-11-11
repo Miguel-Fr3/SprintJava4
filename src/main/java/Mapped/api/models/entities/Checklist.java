@@ -12,8 +12,16 @@ public class Checklist {
     }
 
     public Checklist(Integer cdChecklis, Date dtCadastroChecklist, String dsChecklist) {
+        this.cdChecklis = cdChecklis;
         this.dtCadastroChecklist = dtCadastroChecklist;
         this.dsChecklist = dsChecklist;
+    }
+
+    public Integer getCdChecklis() {
+        return cdChecklis;
+    }
+
+    public void setCdChecklis(Integer cdChecklis) {
         this.cdChecklis = cdChecklis;
     }
 

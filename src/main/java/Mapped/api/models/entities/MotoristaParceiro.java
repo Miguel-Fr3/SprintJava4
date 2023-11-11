@@ -16,16 +16,24 @@ public class MotoristaParceiro {
     public MotoristaParceiro() {
     }
 
-    public MotoristaParceiro(String nmMotorista, Integer nrCep, String nmRua, String nmCidade, String nmEstado,
-            String dsComplemento, Integer nrCpf, Integer dsNumeroEndereco, Integer fgAtivo, Integer cdMotorista) {
+    public MotoristaParceiro(Integer cdMotorista, String nmMotorista, Integer nrCep, String nmRua, String nmCidade, String nmEstado, String dsComplemento, Integer nrCpf, Integer dsNumeroEndereco, Integer fgAtivo) {
+        this.cdMotorista = cdMotorista;
         this.nmMotorista = nmMotorista;
         this.nrCep = nrCep;
         this.nmRua = nmRua;
         this.nmCidade = nmCidade;
         this.nmEstado = nmEstado;
         this.dsComplemento = dsComplemento;
+        this.nrCpf = nrCpf;
         this.dsNumeroEndereco = dsNumeroEndereco;
         this.fgAtivo = fgAtivo;
+    }
+
+    public Integer getCdMotorista() {
+        return cdMotorista;
+    }
+
+    public void setCdMotorista(Integer cdMotorista) {
         this.cdMotorista = cdMotorista;
     }
 

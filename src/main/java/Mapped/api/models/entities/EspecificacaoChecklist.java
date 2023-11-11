@@ -12,10 +12,18 @@ public class EspecificacaoChecklist {
     public EspecificacaoChecklist() {
     }
 
-    public EspecificacaoChecklist(String dsObservacaoItemChecklist, boolean nrNotaItemChecklist, Date dtPreencherChecklist, Integer cdPCheck) {
+    public EspecificacaoChecklist(Integer cdPCheck, String dsObservacaoItemChecklist, boolean nrNotaItemChecklist, Date dtPreencherChecklist) {
+        this.cdPCheck = cdPCheck;
         this.dsObservacaoItemChecklist = dsObservacaoItemChecklist;
         this.nrNotaItemChecklist = nrNotaItemChecklist;
         this.dtPreencherChecklist = dtPreencherChecklist;
+    }
+
+    public Integer getCdPCheck() {
+        return cdPCheck;
+    }
+
+    public void setCdPCheck(Integer cdPCheck) {
         this.cdPCheck = cdPCheck;
     }
 

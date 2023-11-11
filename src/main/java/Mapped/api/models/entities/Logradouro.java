@@ -9,9 +9,17 @@ public class Logradouro {
     public Logradouro() {
     }
 
-    public Logradouro(String nmLogradouro, double nrCep, Integer cdLogradouro) {
+    public Logradouro(Integer cdLogradouro, String nmLogradouro, double nrCep) {
+        this.cdLogradouro = cdLogradouro;
         this.nmLogradouro = nmLogradouro;
         this.nrCep = nrCep;
+    }
+
+    public Integer getCdLogradouro() {
+        return cdLogradouro;
+    }
+
+    public void setCdLogradouro(Integer cdLogradouro) {
         this.cdLogradouro = cdLogradouro;
     }
 

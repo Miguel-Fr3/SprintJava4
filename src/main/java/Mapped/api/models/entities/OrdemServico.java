@@ -22,9 +22,8 @@ public class OrdemServico {
     public OrdemServico() {
     }
 
-    public OrdemServico(String sgTipo, double nrCnpjCpf, double nrRgInscEstadual, String dsEmailCliente, String nmContatoCliente, 
-                        double nrTelComercial, String nmModelo, Date dtAgendamento, double nrAnoFabricacao, double fgAtivo,
-                        LocalTime hrAgendamento, String nmParceiro, String dsChassi, Integer cdOs) {
+    public OrdemServico(Integer cdOs, String sgTipo, double nrCnpjCpf, double nrRgInscEstadual, String dsEmailCliente, String nmContatoCliente, double nrTelComercial, String nmModelo, Date dtAgendamento, double nrAnoFabricacao, double fgAtivo, LocalTime hrAgendamento, String nmParceiro, String dsChassi) {
+        this.cdOs = cdOs;
         this.sgTipo = sgTipo;
         this.nrCnpjCpf = nrCnpjCpf;
         this.nrRgInscEstadual = nrRgInscEstadual;
@@ -38,6 +37,13 @@ public class OrdemServico {
         this.hrAgendamento = hrAgendamento;
         this.nmParceiro = nmParceiro;
         this.dsChassi = dsChassi;
+    }
+
+    public Integer getCdOs() {
+        return cdOs;
+    }
+
+    public void setCdOs(Integer cdOs) {
         this.cdOs = cdOs;
     }
 

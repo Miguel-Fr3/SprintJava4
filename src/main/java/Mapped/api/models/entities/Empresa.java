@@ -19,20 +19,27 @@ public class Empresa {
     public Empresa() {
     }
 
-    public Empresa(String nmEmpresa, Long nrNumero, String nmRua, String dsComplemento, String nmBairro, String nmCidade,
-            String sgEstado, Long nrCep, Long nrDddContato, String dsEmailContato, Long nrCnpj, String dsRazaoSocial, Integer cdEmpresa) {
+    public Empresa(Integer cdEmpresa, String nmEmpresa, Long nrNumero, String nmRua, String dsComplemento, String nmBairro, String nmCidade, String sgEstado, Long nrCep, Long nrDddContato, String dsEmailContato, Long nrCnpj, String dsRazaoSocial) {
+        this.cdEmpresa = cdEmpresa;
         this.nmEmpresa = nmEmpresa;
         this.nrNumero = nrNumero;
         this.nmRua = nmRua;
+        this.dsComplemento = dsComplemento;
         this.nmBairro = nmBairro;
         this.nmCidade = nmCidade;
         this.sgEstado = sgEstado;
         this.nrCep = nrCep;
         this.nrDddContato = nrDddContato;
         this.dsEmailContato = dsEmailContato;
-        this.dsComplemento = dsComplemento;
         this.nrCnpj = nrCnpj;
         this.dsRazaoSocial = dsRazaoSocial;
+    }
+
+    public Integer getCdEmpresa() {
+        return cdEmpresa;
+    }
+
+    public void setCdEmpresa(Integer cdEmpresa) {
         this.cdEmpresa = cdEmpresa;
     }
 

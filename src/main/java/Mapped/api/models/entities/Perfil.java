@@ -9,9 +9,17 @@ public class Perfil {
     public Perfil() {
     }
 
-    public Perfil(String Perfil, String Nome, Integer cdPerfil) {
-        this.Perfil = Perfil;
-        this.Nome = Nome;
+    public Perfil(Integer cdPerfil, String perfil, String nome) {
+        this.cdPerfil = cdPerfil;
+        Perfil = perfil;
+        Nome = nome;
+    }
+
+    public Integer getCdPerfil() {
+        return cdPerfil;
+    }
+
+    public void setCdPerfil(Integer cdPerfil) {
         this.cdPerfil = cdPerfil;
     }
 
@@ -19,15 +27,15 @@ public class Perfil {
         return Perfil;
     }
 
-    public void setPerfil(String Perfil) {
-        this.Perfil = Perfil;
+    public void setPerfil(String perfil) {
+        Perfil = perfil;
     }
 
     public String getNome() {
         return Nome;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        Nome = nome;
     }
 }

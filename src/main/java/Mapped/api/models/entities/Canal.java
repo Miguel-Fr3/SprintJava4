@@ -10,8 +10,16 @@ public class Canal {
     }
 
     public Canal(Integer cdCanal, String nmCanal, String dsDescricao) {
+        this.cdCanal = cdCanal;
         this.nmCanal = nmCanal;
         this.dsDescricao = dsDescricao;
+    }
+
+    public Integer getCdCanal() {
+        return cdCanal;
+    }
+
+    public void setCdCanal(Integer cdCanal) {
         this.cdCanal = cdCanal;
     }
 
