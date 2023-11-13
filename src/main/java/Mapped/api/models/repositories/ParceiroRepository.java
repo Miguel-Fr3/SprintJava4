@@ -16,7 +16,7 @@ public class ParceiroRepository {
     public List<Parceiro> findAll() throws SQLException {
         List<Parceiro> parceiros = new ArrayList<>();
 
-        String sql = "SELECT * FROM Parceiro";
+        String sql = "SELECT * FROM TB_PS_PARC";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql);
@@ -30,7 +30,7 @@ public class ParceiroRepository {
 
     public void add(Parceiro parceiro) throws SQLException {
 
-        String sql = "INSERT INTO Parceiro (nmParceiro, nrCep, nmRua, nmCidade, nmEstado, dsComplemento, nrCpf, dsNumeroEndereco, fgAtivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_PS_PARC (nmParceiro, nrCep, nmRua, nmCidade, nmEstado, dsComplemento, nrCpf, dsNumeroEndereco, fgAtivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -41,7 +41,7 @@ public class ParceiroRepository {
 
     public Optional<Parceiro> find(int id) throws SQLException {
 
-        String sql = "SELECT * FROM Parceiro WHERE cdParceiro = ?";
+        String sql = "SELECT * FROM TB_PS_PARC WHERE cdParceiro = ?";
         Parceiro parceiro = null;
 
         try (Connection conn = DatabaseFactory.getConnection();
@@ -59,7 +59,7 @@ public class ParceiroRepository {
 
     public void update(int id, Parceiro parceiro) {
 
-        String sql = "UPDATE Parceiro SET nmParceiro=?, nrCep=?, nmRua=?, nmCidade=?, nmEstado=?, dsComplemento=?, nrCpf=?, dsNumeroEndereco=?, fgAtivo=? WHERE cdParceiro=?";
+        String sql = "UPDATE TB_PS_PARC SET nmParceiro=?, nrCep=?, nmRua=?, nmCidade=?, nmEstado=?, dsComplemento=?, nrCpf=?, dsNumeroEndereco=?, fgAtivo=? WHERE cdParceiro=?";
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
             setParceiroParameters(statement, parceiro);
@@ -72,7 +72,7 @@ public class ParceiroRepository {
 
     public void delete(int id) {
         
-        String sql = "DELETE FROM Parceiro WHERE cdParceiro = ?";
+        String sql = "DELETE FROM TB_PS_PARC WHERE cdParceiro = ?";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {

@@ -13,10 +13,13 @@ import java.util.Optional;
 
 public class MotoristaParceiroRepository {
 
+    private PreparedStatement preparedStatement;
+    private MotoristaParceiro motoristaParceiro;
+
     public List<MotoristaParceiro> findAll() throws SQLException {
 
         List<MotoristaParceiro> motoristasParceiros = new ArrayList<>();
-        String sql = "SELECT * FROM MotoristaParceiro";
+        String sql = "SELECT * FROM TB_PS_MOTPAR";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql);
@@ -30,7 +33,7 @@ public class MotoristaParceiroRepository {
     }
 
     public void add(MotoristaParceiro motoristaParceiro) throws SQLException {
-        String sql = "INSERT INTO MotoristaParceiro (nmMotorista, nrCep, nmRua, nmCidade, nmEstado, dsComplemento, nrCpf, dsNumeroEndereco, fgAtivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO TB_PS_MOTPAR (nmMotorista, nrCep, nmRua, nmCidade, nmEstado, dsComplemento, nrCpf, dsNumeroEndereco, fgAtivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -40,7 +43,7 @@ public class MotoristaParceiroRepository {
     }
 
     public Optional<MotoristaParceiro> find(int id) throws SQLException {
-        String sql = "SELECT * FROM MotoristaParceiro WHERE cdMotorista = ?";
+        String sql = "SELECT * FROM TB_PS_MOTPAR WHERE cdMotorista = ?";
         MotoristaParceiro motoristaParceiro = null;
 
         try (Connection conn = DatabaseFactory.getConnection();
@@ -57,7 +60,7 @@ public class MotoristaParceiroRepository {
     }
 
     public void update(int id, MotoristaParceiro motoristaParceiro) {
-        String sql = "UPDATE MotoristaParceiro SET nmMotorista=?, nrCep=?, nmRua=?, nmCidade=?, nmEstado=?, dsComplemento=?, nrCpf=?, dsNumeroEndereco=?, fgAtivo=? WHERE cdMotorista=?";
+        String sql = "UPDATE TB_PS_MOTPAR SET nmMotorista=?, nrCep=?, nmRua=?, nmCidade=?, nmEstado=?, dsComplemento=?, nrCpf=?, dsNumeroEndereco=?, fgAtivo=? WHERE cdMotorista=?";
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
             setMotoristaParceiroParameters(statement, motoristaParceiro);
@@ -69,7 +72,7 @@ public class MotoristaParceiroRepository {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM MotoristaParceiro WHERE cdMotorista = ?";
+        String sql = "DELETE FROM TB_PS_MOTPAR WHERE cdMotorista = ?";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -96,6 +99,8 @@ public class MotoristaParceiroRepository {
     }
 
     private void setMotoristaParceiroParameters(PreparedStatement preparedStatement, MotoristaParceiro motoristaParceiro) throws SQLException {
+        this.preparedStatement = preparedStatement;
+        this.motoristaParceiro = motoristaParceiro;
         preparedStatement.setString(1, motoristaParceiro.getNmMotorista());
         preparedStatement.setInt(2, motoristaParceiro.getNrCep());
         preparedStatement.setString(3, motoristaParceiro.getNmRua());
