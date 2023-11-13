@@ -18,7 +18,7 @@ public class Fabricante {
     }
 
     public Integer getCdFabricante() {
-        return cdFabricante;
+        return cdFabricante;    
     }
 
     public void setCdFabricante(Integer cdFabricante) {
