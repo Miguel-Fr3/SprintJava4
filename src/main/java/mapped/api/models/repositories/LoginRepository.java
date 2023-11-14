@@ -21,7 +21,7 @@ public class LoginRepository {
             while (results.next()) {
                 logins.add(new Login(
                         results.getInt("CDLOGIN"),
-                        results.getLong("NRCPF"), // Alterado de getInt para getLong
+                        results.getLong("NRCPF"),
                         results.getString("DSSENHA")));
             }
         }
