@@ -5,6 +5,9 @@ import Mapped.api.models.repositories.LoginRepository;
 import Mapped.api.services.LoginService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,19 +17,22 @@ public class LoginResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Login> getLogin() throws SQLException{
+    public List<Login> getLogin() throws SQLException {
         return repository.findAll();
     }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void addLogin(Login login) throws SQLException {
         System.out.println(login.getSenha());
         repository.add(login);
     }
+
     @POST
     @Path("/autenticar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void Login(@FormParam("CPF") String CPF, @FormParam("Senha") String Senha) throws Exception {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public void login(@FormParam("CPF") String CPF, @FormParam("Senha") String Senha) throws Exception {
         LoginService loginService = new LoginService();
         loginService.login(CPF, Senha);
     }
@@ -34,7 +40,7 @@ public class LoginResource {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Login getLoginPorId(@PathParam("id") int id) throws SQLException{
+    public Login getLoginPorId(@PathParam("id") int id) throws SQLException {
         return repository.find(id).orElse(null);
     }
 
@@ -51,13 +57,20 @@ public class LoginResource {
         return login;
     }
 
-
     @DELETE
     @Path("{id}")
-    public void deleteLogin(@PathParam("id") int id) throws SQLException{
-        if(repository.find(id).isPresent()){
+    public void deleteLogin(@PathParam("id") int id) throws SQLException {
+        if (repository.find(id).isPresent()) {
             repository.delete(id);
         }
     }
-
+    @OPTIONS
+    public Response options() {
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", "http://localhost:3000")
+                .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization")
+                .header("Access-Control-Allow-Credentials", "true")
+                .build();
+    }
 }
