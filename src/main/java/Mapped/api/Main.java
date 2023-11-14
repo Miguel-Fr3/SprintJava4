@@ -25,7 +25,7 @@ public class Main {
         // in org.example package
         final ResourceConfig rc = new ResourceConfig().packages("mapped.api.controllers");
 
-        rc.register((new CorsFilter()));
+        rc.register(new CorsFilter());
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI

@@ -6,10 +6,12 @@ import Mapped.api.services.LoginService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.sql.SQLException;
 import java.util.List;
+
+
 
 @Path("/login")
 public class LoginResource {
@@ -31,7 +33,6 @@ public class LoginResource {
     @POST
     @Path("/autenticar")
     @Consumes(MediaType.APPLICATION_JSON)
-    @CrossOrigin(origins = "http://localhost:3000")
     public void login(@FormParam("CPF") String CPF, @FormParam("Senha") String Senha) throws Exception {
         LoginService loginService = new LoginService();
         loginService.login(CPF, Senha);
