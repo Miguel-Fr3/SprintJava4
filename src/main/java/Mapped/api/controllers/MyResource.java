@@ -1,5 +1,4 @@
-package Mapped.api.controllers;
-
+package mapped.api.controllers;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

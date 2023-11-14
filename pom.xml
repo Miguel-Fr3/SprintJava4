@@ -3,11 +3,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>ApiMapped</artifactId>
+    <groupId>mapped.api</groupId>
+    <artifactId>SprintJava4</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>ApiMapped</name>
+    <name>SprintJava4</name>
 
     <dependencyManagement>
         <dependencies>
@@ -23,14 +23,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>3.0-alpha-1</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-grizzly2-http</artifactId>
         </dependency>
@@ -39,8 +31,8 @@
             <artifactId>jersey-hk2</artifactId>
         </dependency>
 
-        <!-- uncomment this to get JSON support:-->
-        <dependency>
+
+         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-binding</artifactId>
         </dependency>
@@ -50,13 +42,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit-jupiter.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc10 -->
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc10</artifactId>
-            <version>19.20.0.0</version>
         </dependency>
     </dependencies>
 
@@ -84,7 +69,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>Mapped.api.Main</mainClass>
+                    <mainClass>mapped.api.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
