@@ -3,8 +3,7 @@ package Mapped.api.models.repositories;
 import Mapped.api.infrastructure.database.DatabaseFactory;
 import Mapped.api.models.entities.Login;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,16 +11,16 @@ import java.util.Optional;
 public class LoginRepository {
 
     public List<Login> findAll() throws SQLException {
-        var logins = new ArrayList<Login>();
-        var sql = "SELECT * FROM TB_PS_LOGIN";
+        List<Login> logins = new ArrayList<>();
+        String sql = "SELECT * FROM TB_PS_LOGIN";
 
-        try (var conn = DatabaseFactory.getConnection();
-             var statement = conn.prepareStatement(sql);
-             var results = statement.executeQuery()) {
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql);
+             ResultSet results = statement.executeQuery()) {
             while (results.next()) {
                 logins.add(new Login(
                         results.getInt("CDLOGIN"),
-                        results.getInt("NRCPF"),
+                        results.getLong("NRCPF"), // Alterado de getInt para getLong
                         results.getString("DSSENHA")));
             }
         }
@@ -29,25 +28,22 @@ public class LoginRepository {
     }
 
     public void add(Login login) throws SQLException {
-        var sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN, NRCPF, DSSENHA) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN, NRCPF, DSSENHA) VALUES (?, ?, ?)";
 
-        try {
-            var conn = DatabaseFactory.getConnection();
-            var statement = conn.prepareStatement(sql);
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setInt(1, login.getId());
-            statement.setInt(2, login.getCPF());
+            statement.setLong(2, login.getCPF());
             statement.setString(3, login.getSenha());
             statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new SQLException(e);
         }
     }
 
     public Optional<Login> find(int id) throws SQLException {
-        var sql = "SELECT * FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
+        String sql = "SELECT * FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
 
-        try (var conn = DatabaseFactory.getConnection();
-             var statement = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setInt(1, id);
 
             try (ResultSet rs = statement.executeQuery()) {
@@ -56,25 +52,19 @@ public class LoginRepository {
                     int nrCpf = rs.getInt("NRCPF");
                     String dsSenha = rs.getString("DSSENHA");
 
-                    var login = new Login(cdLogin, nrCpf, dsSenha);
-                    return Optional.ofNullable(login);
+                    Login login = new Login(cdLogin, nrCpf, dsSenha);
+                    return Optional.of(login);
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new SQLException(e);
         }
         return Optional.empty();
     }
 
     public Login login(String CPF) throws SQLException {
-        var sql = "SELECT * FROM TB_PS_LOGIN WHERE NRCPF = ?";
+        String sql = "SELECT * FROM TB_PS_LOGIN WHERE NRCPF = ?";
 
-        try {
-            var conn = DatabaseFactory.getConnection();
-            var statement = conn.prepareStatement(sql);
-
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
             try {
                 int cpf = Integer.parseInt(CPF);
                 statement.setInt(1, cpf);
@@ -82,34 +72,26 @@ public class LoginRepository {
                 throw new IllegalArgumentException("CPF inválido", e);
             }
 
-            try {
-                ResultSet rs = statement.executeQuery();
+            try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    var login = new Login(
+                    return new Login(
                             rs.getInt("CDLOGIN"),
                             rs.getInt("NRCPF"),
                             rs.getString("DSSENHA"));
-                    return login;
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
-        } catch (SQLException e) {
-            throw new SQLException(e);
         }
-        return null;
+        throw new RuntimeException("Usuário não encontrado");
     }
 
     public void update(Login login) {
-        var sql = "UPDATE TB_PS_LOGIN SET NRCPF = ?, DSSENHA = ? WHERE CDLOGIN = ?";
-        try {
-            var conn = DatabaseFactory.getConnection();
-            var statement = conn.prepareStatement(sql);
-            statement.setInt(1, login.getCPF());
+        String sql = "UPDATE TB_PS_LOGIN SET NRCPF = ?, DSSENHA = ? WHERE CDLOGIN = ?";
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setLong(1, login.getCPF());
             statement.setString(2, login.getSenha());
             statement.setInt(3, login.getId());
             statement.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -118,9 +100,8 @@ public class LoginRepository {
     public void delete(int id) {
         String sql = "DELETE FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
 
-        try {
-            var conn = DatabaseFactory.getConnection();
-            var statement = conn.prepareStatement(sql);
+        try (Connection conn = DatabaseFactory.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
