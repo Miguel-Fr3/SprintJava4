@@ -1,5 +1,6 @@
 package mapped.api.models.repositories;
 
+
 import mapped.api.infrastructure.database.DatabaseFactory;
 import mapped.api.models.entities.Login;
 

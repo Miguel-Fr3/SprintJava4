@@ -5,7 +5,6 @@ import mapped.api.models.repositories.LoginRepository;
 import mapped.api.services.LoginService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 
 
 import java.sql.SQLException;
