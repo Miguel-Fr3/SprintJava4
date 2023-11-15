@@ -29,17 +29,21 @@ public class LoginRepository {
         return logins;
     }
 
-    public void add(Login login) throws SQLException {
-        String sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN, NRCPF, DSSENHA) VALUES (?, ?, ?)";
+    public void add(Login login) {
+        String sql = "INSERT INTO TB_PS_LOGIN (CDLOGIN, NRCPF, DSSENHA) VALUES (seq_tb_ps_login.NEXTVAL, ?, ?)";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setInt(1, login.getId());
-            statement.setLong(2, login.getCPF());
-            statement.setString(3, login.getSenha());
+            statement.setLong(1, login.getCPF());
+            statement.setString(2, login.getSenha());
             statement.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.err.println("Erro: Violação de chave única. Certifique-se de que a sequência 'seq_tb_ps_login' está configurada corretamente.");
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao adicionar login", e);
         }
     }
+
 
     public Optional<Login> find(int id) throws SQLException {
         String sql = "SELECT * FROM TB_PS_LOGIN WHERE CDLOGIN = ?";
