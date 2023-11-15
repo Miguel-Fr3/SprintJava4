@@ -44,31 +44,15 @@ public class LoginResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(LoginDto login) throws Exception {
-        String cpf = String.valueOf(login.getCPF());
+        LoginService loginService = new LoginService();
+        System.out.println(login.getCPF());
+        System.out.println(login.getSenha());
+        boolean result =  loginService.login(login.getCPF(), login.getSenha());
+        System.out.println(result);
+        LoginRetornoDto response = new LoginRetornoDto(result);
 
-
-        if (cpf.trim().isEmpty()) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("O campo CPF não pode estar vazio.")
-                    .build();
-        }
-
-
-        try {
-            long cpfNumber = Long.parseLong(cpf);
-
-            LoginService loginService = new LoginService();
-            boolean result =  loginService.login(Long.parseLong(cpf), login.getSenha());
-            LoginRetornoDto response = new LoginRetornoDto(result);
-            return Response.status(Response.Status.OK).entity(response).build();
-        } catch (NumberFormatException e) {
-
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Formato de CPF inválido.")
-                    .build();
-        }
+        return Response.status(Response.Status.OK).entity(response).build();
     }
-
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
