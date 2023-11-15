@@ -32,6 +32,13 @@ public class LoginResource {
         repository.add(login);
     }
 
+    @GET
+    @Path("/autenticar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Login> getLoginAut() throws SQLException {
+        return repository.findAll();
+    }
     @POST
     @Path("/autenticar")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -46,7 +53,6 @@ public class LoginResource {
 
         return Response.status(Response.Status.OK).entity(response).build();
     }
-
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
