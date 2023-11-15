@@ -1,5 +1,8 @@
 package mapped.api.controllers;
 
+import jakarta.ws.rs.core.Response;
+import mapped.api.dtos.LoginDto;
+import mapped.api.dtos.LoginRetornoDto;
 import mapped.api.models.entities.Login;
 import mapped.api.models.repositories.LoginRepository;
 import mapped.api.services.LoginService;
@@ -32,9 +35,16 @@ public class LoginResource {
     @POST
     @Path("/autenticar")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void login(@FormParam("CPF") String CPF, @FormParam("Senha") String Senha) throws Exception {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(LoginDto login) throws Exception {
         LoginService loginService = new LoginService();
-        loginService.login(CPF, Senha);
+        System.out.println(login.getCPF());
+        System.out.println(login.getSenha());
+        boolean result =  loginService.login(login.getCPF(), login.getSenha());
+        System.out.println(result);
+        LoginRetornoDto response = new LoginRetornoDto(result);
+
+        return Response.status(Response.Status.OK).entity(response).build();
     }
 
     @GET

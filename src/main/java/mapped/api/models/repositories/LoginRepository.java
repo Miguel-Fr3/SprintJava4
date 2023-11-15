@@ -62,28 +62,32 @@ public class LoginRepository {
         return Optional.empty();
     }
 
-    public Login login(String CPF) throws SQLException {
+    public Login login(long CPF) throws SQLException {
         String sql = "SELECT * FROM TB_PS_LOGIN WHERE NRCPF = ?";
 
         try (Connection conn = DatabaseFactory.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
             try {
-                int cpf = Integer.parseInt(CPF);
-                statement.setInt(1, cpf);
+                statement.setLong(1, CPF);
+
+
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("CPF inválido", e);
             }
 
             try (ResultSet rs = statement.executeQuery()) {
+                Login login = new Login();
+
                 if (rs.next()) {
-                    return new Login(
-                            rs.getInt("CDLOGIN"),
-                            rs.getInt("NRCPF"),
-                            rs.getString("DSSENHA"));
+                            login.setId(rs.getInt("CDLOGIN"));
+                            login.setCPF(rs.getLong("NRCPF"));
+                            login.setSenha(rs.getString("DSSENHA"));
                 }
+
+                return login;
             }
         }
-        throw new RuntimeException("Usuário não encontrado");
+
     }
 
     public void update(Login login) {
